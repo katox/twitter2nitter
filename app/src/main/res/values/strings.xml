@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">twitter2nitter</string>
 
-    <string name="description">Hello! This app only redirects shared urls to nitter.\nShare twitter url to this app and it will redirect.\n#StandWithUkraine</string>
+    <string name="description">Hello! This app only copies twitter URLs rewritten to nitter. \nShare twitter url to this app and copy the modified URL link to the clipboard.\n#StandWithUkraine</string>
     <string name="view_in_app">Redirect to nitter</string>
 
     <string name="action_settings">Settings</string>
@@ -15,7 +15,7 @@
     <string name="redirect_url">Type redirect url</string>
 
 
-    <string name="pref_redirect_url_default">https://nitter.1d4.us</string>
+    <string name="pref_redirect_url_default">https://nitter.net</string>
     <string name="pref_redirect_url_key">pref_redirect_url_key</string>
     <string name="action_nitter_instances">Nitter instances</string>
     <string name="nitter_instances_url">https://xnaas.github.io/nitter-instances/</string>

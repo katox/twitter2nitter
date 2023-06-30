@@ -1,6 +1,10 @@
 package eu.auct.twitter2nitter
 
+import android.R.attr.label
+import android.R.attr.text
 import android.app.AlertDialog
+import android.content.ClipData
+import android.content.ClipboardManager
 import android.content.Intent
 import android.content.SharedPreferences
 import android.net.Uri
@@ -14,6 +18,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import java.util.regex.Matcher
 import java.util.regex.Pattern
+
 
 class MainActivity : AppCompatActivity() {
     private lateinit var sharedPref: SharedPreferences
@@ -99,12 +104,18 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private fun copyLinkToClipBoard(link: String) {
+        val clipboard: ClipboardManager = getSystemService(CLIPBOARD_SERVICE) as ClipboardManager
+        val clip = ClipData.newPlainText("nitter URL", link)
+        clipboard.setPrimaryClip(clip);
+    }
+
     private fun handleSendText(intent: Intent) {
         intent.getStringExtra(Intent.EXTRA_TEXT)?.let {
             val tweet = getTweet(it)
             if (tweet != null) {
                 val link = getRedirectUrl() + tweet
-                startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(link)))
+                copyLinkToClipBoard(link)
             }
         }
         finish()
@@ -133,7 +144,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun getTweet(input: String): String? {
-        val pattern: Pattern = Pattern.compile(".*?twitter\\.com(/.*?)(\\s|\$|&)")
+        val pattern: Pattern = Pattern.compile(".*?twitter\\.com(/.*?)(\\s|\$|\\?|&)")
         val matcher: Matcher = pattern.matcher(input)
         matcher.find()
 
